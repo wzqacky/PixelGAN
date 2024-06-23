@@ -1,9 +1,12 @@
+from model import *
+from parse import *
+
 import torch 
-# from WGAN.model import *
-from WGAN_GP.model import *
 import matplotlib.pyplot as plt 
 import torchvision.utils as vutils
 import numpy as np
+import sys 
+
 
 device = device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(device)
@@ -14,7 +17,9 @@ netG.apply(initialize_weights)
 print(netG)
 
 # load the pretrained model here 
-gen = torch.load('Pretrained_models/generator25000.pt')
+parser = test_parser()
+args = parser.parse_args(sys.argv[1:])
+gen = torch.load(f'pretrained_model/{args.model}')
 netG.load_state_dict(gen['model_state_dict'])
 
 fixed_noise = torch.randn(64, nz, 1, 1, device=device)
