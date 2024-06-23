@@ -1,15 +1,37 @@
-# PixelGAN
+# Summary 
 
-The repository serves as an exercise to implement Generative Adverserial Network (GAN) to generate images. 
+This repository serves as an exercise to implement Generative Adverserial Network (GAN), specifically the Wasserstein GAN to generate images. 
 
-WGAN_GP folder contains the details about the model architecture and the training script. 
+# Dataset
+Curated Pixel Art 512x512 
+Available [here](https://www.kaggle.com/datasets/artvandaley/curated-pixel-art-512x512)
 
-pretrained_model consists of the generator and discriminator trained with 25,000 epochs (400,000 updates), learning rate=0.0001
+# Structure of repo 
+<b>Dataset</b>
+- Contains the pixel art images for training the model
 
-generate_image.py could generate sample images for evaluation using the pretrained model.
+<b>pretrained_model</b>
+- Directory for saving models
+- Contains a pair of pretrained generator and discrminator (25,000 epochs with learning rate=1e-4)
+
+<b>train.py</b>
+```
+python train.py --model LSTM --num_epochs 500
+```
+#### Optional parameters:
+- num. of epochs, default=500
+- learning rate, default=1e-4
+- gradient penalty, default=10
+- discriminator iterations, default=5
+- save model, default=True
+
+<b>generate_image.py</b>
+```
+python generate_image.py --model generator25000.py
+```
+#### Optional parameters:
+- model, default=generator25000.py
 
 Samples images:
-
 ![sample](https://github.com/wzqacky/PixelGAN/assets/100191968/ef79fcdb-9730-45f2-b516-be4da851be93)
 
-Source of the dataset: https://www.kaggle.com/datasets/artvandaley/curated-pixel-art-512x512
